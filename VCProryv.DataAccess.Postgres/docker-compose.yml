@@ -1,0 +1,13 @@
+﻿# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    container_name: VCProryb_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ps12331
+    ports:
+      - 15432:5432
