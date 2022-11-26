@@ -12,8 +12,10 @@ public class VCProryvDbContext : DbContext
     public DbSet<Activity> Activities { get; set; }
     public DbSet<Volunteer> Volunteers { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder) 
     {
+        //modelBuilder.ApplyConfiguration(new ActivityEntitiyConfiguration());
+        //modelBuilder.ApplyConfiguration(new VolunteerEntitiyConfiguration());
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(VCProryvDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
