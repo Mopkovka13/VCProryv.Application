@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VCProryv.DataAccess.Postgres;
@@ -11,9 +12,11 @@ using VCProryv.DataAccess.Postgres;
 namespace VCProryv.DataAccess.Postgres.Migrations
 {
     [DbContext(typeof(VCProryvDbContext))]
-    partial class VCProryvDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221204094228_1NormalForm")]
+    partial class _1NormalForm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VCProryv.BusinessLogic\VCProryv.BusinessLogic.csproj" />
+    <ProjectReference Include="..\VCProryv.Core\VCProryv.Core.csproj" />
     <ProjectReference Include="..\VCProryv.DataAccess.Postgres\VCProryv.DataAccess.Postgres.csproj" />
   </ItemGroup>
 

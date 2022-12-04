@@ -11,8 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<VCProryvDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(VCProryvDbContext))
-                        /*b => b.MigrationsAssembly("VCProryv.API")*/); //Берётся строка из appsetings
+    options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(VCProryvDbContext))); //Берётся строка из appsetings.json
 });
 
 var app = builder.Build();
