@@ -4,7 +4,7 @@
     {
         Task<Volunteer[]> Get();
         Task<int> Create(Volunteer volunteer);
-        Task<int> Update();
-
+        Task<bool> Update(Volunteer volunteer);
+        Task<bool> Delete(int id);
     }
 }

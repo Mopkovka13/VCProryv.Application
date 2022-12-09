@@ -51,5 +51,29 @@ namespace VCProryv.API.Controllers
             return Ok(new CreateVolunteerResponse { VolunteerId = volunteerId});
         }
 
+        [HttpPut]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Update([FromBody] UpdateVolunteerRequest request)
+        {
+            var volunteer = new Core.Volunteer
+            {
+                Id = request.Id,
+                Name = request.Name,
+                Surname = request.Surname,
+                MiddleName = request.MiddleName,
+                Institute = request.Institute
+            };
+            var status = await _volunteersService.Update(volunteer);
+            return Ok(status);
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Delete([FromBody] DeleteVolunteerRequest request)
+        {
+            var status = await _volunteersService.Delete(request.VolunteerId);
+            return Ok(status);
+        }
+
     }
 }

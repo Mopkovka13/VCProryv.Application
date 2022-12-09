@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 using VCProryv.Core;
 using VCProryv.Core.Repositories;
 
@@ -11,6 +12,21 @@ namespace VCProryv.DataAccess.Postgres.Repositories
         public VolunteersRepository(VCProryvDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<Volunteer[]> Get()
+        {
+            var volunteers = await _context.Volunteers
+                .AsNoTracking()
+                .ToArrayAsync();
+            return volunteers.Select(x => new Volunteer
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Surname = x.Surname,
+                MiddleName = x.MiddleName,
+                Institute = x.Institute
+            }).ToArray();
         }
 
         public async Task<int> Add(Volunteer volunteer)
@@ -34,19 +50,34 @@ namespace VCProryv.DataAccess.Postgres.Repositories
             return newVolunteerEntity.Id;
         }
 
-        public async Task<Volunteer[]> Get()
+        
+
+        public async Task<bool> Update(Volunteer correctVolunteer)
         {
-            var volunteers = await _context.Volunteers
-                .AsNoTracking()
-                .ToArrayAsync();
-            return volunteers.Select(x => new Volunteer
+            var volunteer = await _context.Volunteers.FirstOrDefaultAsync(x => x.Id == correctVolunteer.Id);
+            if(volunteer != null)
             {
-                Id = x.Id,
-                Name = x.Name,
-                Surname = x.Surname,
-                MiddleName= x.MiddleName,
-                Institute = x.Institute
-            }).ToArray();
+                volunteer.Name = correctVolunteer.Name;
+                volunteer.Surname = correctVolunteer.Surname;
+                volunteer.MiddleName = correctVolunteer.MiddleName;
+                volunteer.Institute = correctVolunteer.Institute;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var volunteer = await _context.Volunteers.FirstOrDefaultAsync(x => x.Id == id);
+            if(volunteer != null)
+            {
+                _context.Volunteers.Remove(volunteer);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+
         }
     }
 }

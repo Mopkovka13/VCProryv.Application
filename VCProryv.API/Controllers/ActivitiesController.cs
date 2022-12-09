@@ -25,7 +25,7 @@ namespace VCProryv.API.Controllers
                 Name = request.Name,
                 Degree = request.Degree,
                 Date = request.Date,
-                Volunteers = request.Volunteers.Select(x => new Core.Volunteer
+                Volunteers = request.Volunteers.Select(x => new Core.Volunteer //Зачем мне все новые данные, если нужно указать только Id Добавленных волонтёров ;(
                 {
                     Id = x.Id,
                     Name = x.Name,
